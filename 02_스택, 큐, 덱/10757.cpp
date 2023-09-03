@@ -16,10 +16,12 @@ string addBigNum(string a, string b) {
 		// a 혹은 b에 더이상 자릿수가 남아있지 않지만 반대편 숫자에는 남아있을 때
 		// 자릿수가 남은 숫자만 더해줌
 		if (aidx < 0) {	
-			stk.push(b[bidx]);
+			stk.push((b[bidx]-'0'+carry)%10);
+			carry = (b[bidx]-'0'+carry)/10;
 		}
 		else if(bidx < 0) {
-			stk.push(a[aidx]);
+			stk.push((a[aidx]-'0'+carry)%10);
+			carry = (a[aidx]-'0'+carry)/10;
 		}
 		// 일반적으로 a, b 모두의 자릿수가 존재할 때
 		// carry는 받아올림, stk에는 한자리 계산 결과를 저장
@@ -42,7 +44,6 @@ string addBigNum(string a, string b) {
 		result.push_back(stk.top()+'0');
 		stk.pop();
 	}
-	result.push_back('\0');
 
 	return result;
 }
